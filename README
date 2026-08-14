@@ -2,12 +2,6 @@
 
 is a scrolling x11 window manager.
 
-![License](https://img.shields.io/badge/license-ISC-blue.svg)
-
-<p align="center">
-  <img src="/assets/img.png" alt="img" width="700">
-</p>
-
 ## to go more in-depth
 
 scrolling means that windows are arranged on a ribbon-style horizontal strip that the user can scroll through.
@@ -24,7 +18,7 @@ mriya is heavily inspired by [niri](https://github.com/niri-wm/niri) and [i3](ht
 ## compile
 
 ```bash
-git clone https://github.com/hokum-b/mriya
+git clone https://github.com/Jezura777/mriya
 cd mriya/
 make
 ```
@@ -49,11 +43,13 @@ this copies `mriya` to `/usr/local/bin/mriya`.
 
 or you can `sudo cp mriya` to `/usr/local/bin`
 
+you can set DESTDIR to install it in chroot or alter the PREFIX so the binary is in your path
+
 ### run 
 
 ```startx ./mriya```
 
-or ```startx ./mriya``` (refer to the install section above.)
+or ```startx mriya``` (refer to the install section above.)
 
 ### set-up with display managers
 
@@ -72,7 +68,7 @@ DesktopNames=mriya
 ### notes
 
 - some distros don't have `/usr/local/bin` in `$PATH` by default.
-- recompilation is required after editing `src/config.h`.
+- recompilation is required after editing `config.h`.
 
 # detailed documentation
 
@@ -80,14 +76,9 @@ refer to [the website](https://hokum-b.github.io/mriya)
 
 # 1.0 release goals
 
-- [x] stable with little to no crashes.
-- [ ] hot reloads
-- [ ] plenty of other qol features
-
 # license
 
-mriya is licensed under the [ISC license](LICENSE)
-
+The original is BSD-3-CLAUSE license code in this fork is under Do the fuck what you want license
 # note
 
 mriya is **ai free** and will remain **ai free.**

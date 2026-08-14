@@ -37,10 +37,10 @@
 #define MOUSEMASK (ButtonPressMask|ButtonReleaseMask|PointerMotionMask)
 
 // programs
-#define TERM "alacritty"
+#define TERM "st"
 #define DMENU "dmenu_run"
-#define BROWSER "firefox"
-#define FILEMANAGER "pcmanfm"
+#define BROWSER "zen-browser"
+#define FILEMANAGER "xfe"
 
 // audio and brightness commands
 #define VOL_UP    "amixer -q set Master 5%+"
@@ -53,14 +53,11 @@
 
 // autostart commands
 static const char *autostart_cmds[] = {
-    "xsetroot -solid '#222222'",
+    "xrandr --output HDMI-A-0 --left-of DisplayPort-0 --primary --auto",
+    "setxkbmap -layout us,cz -variant ,qwerty -option grp:win_space_toggle",
     "xrdb -merge ~/.Xresources",
-    "picom --backend glx &",
     "dunst &",
-    "sheet --restore",
-    "polybar example &",
-    "nm-applet &",
-    "volumeicon &",
+    "wal -R",
 };
 
 #define AUTOSTART_LEN (sizeof autostart_cmds / sizeof autostart_cmds[0])
@@ -73,7 +70,6 @@ static const Rule rules[] = {
     { "Gimp", NULL, NULL, 0, 1, -1 },
     { "Firefox", NULL, NULL, 1 << 8, 0, -1 },
     { "St", NULL, NULL, 0, 0, -1 },
-    { "Alacritty", NULL, NULL, 0, 0, -1 },
 };
 
 // layout symbols
@@ -116,29 +112,29 @@ static void resizemouse(const char *arg);
 // keybindings
 static Key keys[] = {
     // launch programs
-    KEY(MODKEY|ShiftMask, XK_Return, spawn, TERM)
+    KEY(MODKEY, XK_Return, spawn, TERM)
+    KEY(MODKEY, XK_s, spawn, BROWSER)
     KEY(MODKEY, XK_d, spawn, DMENU)
     // close and quit
-    KEY(MODKEY, XK_w, killclient, NULL)
-    KEY(MODKEY|ShiftMask, XK_q, killclient, NULL)
+    KEY(MODKEY, XK_q, killclient, NULL)
     KEY(MODKEY|ShiftMask, XK_e, quit, NULL)
     KEY(MODKEY|ShiftMask, XK_r, restartwm, NULL)
     // focus navigation (vim style hjkl)
     KEY(MODKEY, XK_h, focusleft, NULL)
-    KEY(MODKEY, XK_j, focusright, NULL)
-    KEY(MODKEY, XK_k, focusleft, NULL)
     KEY(MODKEY, XK_l, focusright, NULL)
-    KEY(MODKEY, XK_Left, focusleft, NULL)
-    KEY(MODKEY, XK_Right, focusright, NULL)
+    //KEY(MODKEY, XK_Left, focusleft, NULL)
+    //KEY(MODKEY, XK_Right, focusright, NULL)
     // workspace navigation
-    KEY(MODKEY, XK_Up, ws_up, NULL)
-    KEY(MODKEY, XK_Down, ws_down, NULL)
+    KEY(MODKEY, XK_j, ws_down, NULL)
+    KEY(MODKEY, XK_k, ws_up, NULL)
+    //KEY(MODKEY, XK_Up, ws_up, NULL)
+    //KEY(MODKEY, XK_Down, ws_down, NULL)
     // gap controls
     KEY(MODKEY|ShiftMask, XK_j, setgaps, "-2")
     KEY(MODKEY|ShiftMask, XK_k, setgaps, "+2")
     KEY(MODKEY|ControlMask, XK_j, setgaps, "0")
     // window state
-    KEY(MODKEY, XK_space, zoom, NULL)
+    KEY(MODKEY, XK_z, zoom, NULL)
     KEY(MODKEY|ShiftMask, XK_space, togglefloating, NULL)
     KEY(MODKEY, XK_f, togglemaximize, NULL)
     KEY(MODKEY|ShiftMask, XK_f, togglefullscreen, NULL)

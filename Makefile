@@ -1,21 +1,27 @@
-CC = cc
-CFLAGS = -Wall -Wextra -O2 -D_POSIX_C_SOURCE=200809L -I/usr/local/include
-LDFLAGS = -L/usr/local/lib -lX11
+PROG = mriya
+SRCS = mriya.c 
+OBJS = ${SRCS:.c=.o}
 
-SRC = src/mriya.c
-OBJ = mriya.o
-TARGET = mriya
+PREFIX ?= /usr/local
 
-all: $(TARGET)
+all: ${PROG}
 
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET) $(LDFLAGS)
+mriya.o: config.h
 
-mriya.o: src/mriya.c src/config.h
-	$(CC) $(CFLAGS) -c src/mriya.c -o mriya.o
+.c.o:
+	${CC} ${CFLAGS} ${CPPFLAGS} -c $<
+
+${PROG}: ${OBJS}
+	${CC} -o $@ ${OBJS} -lX11 ${LDFLAGS}
+
+install: all
+	mkdir -p ${DESTDIR}${PREFIX}/bin
+	install -m 755 ${PROG} ${DESTDIR}${PREFIX}/bin/${PROG}
+
+uninstall:
+	rm ${DESTDIR}${PREFIX}/bin/${PROG}
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	-rm -f ${OBJS} ${PROG}
 
-install: $(TARGET)
-	install -m 755 $(TARGET) /usr/local/bin/
+.PHONY: all clean install uninstall
