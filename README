@@ -74,7 +74,11 @@ DesktopNames=mriya
 
 refer to [the website](https://hokum-b.github.io/mriya)
 
-# 1.0 release goals
+# TODO
+- [ ] notebook touchpad gestures
+- [ ] scrolling wheel support
+- [ ] new window at the end, new window next, new window prev
+- [ ] backport changes from the orig repo
 
 # license
 
